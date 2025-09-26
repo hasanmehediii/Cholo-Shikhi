@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, isValidElement } from "react";
 import parse from "html-react-parser";
 
 interface Section {
@@ -29,7 +29,7 @@ export default function SectionCard({ section, htmlContent }: { section: Section
                 return element.map(getTextContent).join(' ');
             }
             // Check if it's a React element with children
-            if (typeof element === 'object' && element !== null && 'props' in element && typeof element.props === 'object' && element.props !== null && 'children' in element.props) {
+            if (isValidElement(element) && element.props && 'children' in element.props) {
                 return getTextContent(element.props.children);
             }
             return '';
