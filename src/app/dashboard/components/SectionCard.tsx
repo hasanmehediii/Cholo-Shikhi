@@ -28,7 +28,8 @@ export default function SectionCard({ section, htmlContent }: { section: Section
             if (Array.isArray(element)) {
                 return element.map(getTextContent).join(' ');
             }
-            if (typeof element === 'object' && element !== null && 'props' in element) {
+            // Check if it's a React element with children
+            if (typeof element === 'object' && element !== null && 'props' in element && typeof element.props === 'object' && element.props !== null && 'children' in element.props) {
                 return getTextContent(element.props.children);
             }
             return '';
