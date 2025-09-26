@@ -2,7 +2,18 @@
 import { useState } from "react";
 import parse from "html-react-parser";
 
-export default function SectionCard({ section, htmlContent }: { section: any, htmlContent: string }) {
+interface Section {
+    toclevel: number;
+    level: string;
+    line: string;
+    number: string;
+    index: string;
+    fromtitle: string;
+    byteoffset: number;
+    anchor: string;
+}
+
+export default function SectionCard({ section, htmlContent }: { section: Section, htmlContent: string }) {
     const [summary, setSummary] = useState("");
     const [summarizing, setSummarizing] = useState(false);
 

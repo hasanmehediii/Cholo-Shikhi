@@ -4,9 +4,32 @@ import { useState } from "react";
 import SearchBar from "./components/SearchBar";
 import SectionCard from "./components/SectionCard";
 
+interface Section {
+    toclevel: number;
+    level: string;
+    line: string;
+    number: string;
+    index: string;
+    fromtitle: string;
+    byteoffset: number;
+    anchor: string;
+}
+
+interface WikiData {
+    title: string;
+    sections: Section[];
+    htmlContent: string;
+}
+
+interface WikiError {
+    error: string;
+}
+
+type WikiApiResponse = WikiData | WikiError;
+
 export default function DashboardPage() {
     const [topic, setTopic] = useState("");
-    const [data, setData] = useState<any>(null);
+    const [data, setData] = useState<WikiData | null>(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
@@ -17,8 +40,8 @@ export default function DashboardPage() {
 
         try {
             const res = await fetch(`/api/wiki?topic=${encodeURIComponent(query)}`);
-            const result = await res.json();
-            if (result.error) {
+            const result: WikiApiResponse = await res.json();
+            if ('error' in result) {
                 setError(result.error);
             } else {
                 setData(result);
@@ -60,7 +83,7 @@ export default function DashboardPage() {
                             {data.title}
                         </h2>
                         <div className="sections-container">
-                            {data.sections.map((section: any) => (
+                            {data.sections.map((section: Section) => (
                                 <SectionCard key={section.index} section={section} htmlContent={data.htmlContent} />
                             ))}
                         </div>
