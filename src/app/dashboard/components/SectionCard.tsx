@@ -48,10 +48,10 @@ export default function SectionCard({ section, htmlContent }: { section: any, ht
     };
 
     return (
-        <div className="section-card bg-white rounded-xl shadow-md overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-lg">
+        <div className="section-card bg-gray-800 text-white rounded-xl shadow-md overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-lg">
             <div className="p-6">
-                <h3 className="section-card-title text-xl font-semibold text-gray-800 mb-4">{section.line}</h3>
-                <div className="section-card-content text-gray-600">
+                <h3 className="section-card-title text-xl font-semibold mb-4">{section.line}</h3>
+                <div className="section-card-content">
                     {parseSectionContent(section.anchor, htmlContent)}
                 </div>
                 <button
@@ -62,8 +62,8 @@ export default function SectionCard({ section, htmlContent }: { section: any, ht
                     {summarizing ? "Summarizing..." : "Summarize"}
                 </button>
                 {summary && (
-                    <div className="mt-4 p-4 bg-gray-100 rounded-md">
-                        <p className="text-gray-700">{summary}</p>
+                    <div className="mt-4 p-4 bg-gray-700 rounded-md">
+                        <p className="text-white">{summary}</p>
                     </div>
                 )}
             </div>

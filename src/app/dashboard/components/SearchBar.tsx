@@ -15,7 +15,7 @@ export default function SearchBar({ topic, setTopic, onSearch }: Props) {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="flex items-center gap-4">
+        <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row items-center gap-4">
             <input
                 type="text"
                 placeholder="Enter a topic to explore... (e.g., Artificial Intelligence)"
@@ -25,7 +25,7 @@ export default function SearchBar({ topic, setTopic, onSearch }: Props) {
             />
             <button
                 type="submit"
-                className="px-8 py-3 text-lg font-bold text-white bg-blue-600 rounded-full hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-300 transform hover:scale-105"
+                className="w-full sm:w-auto px-8 py-3 text-lg font-bold text-white bg-blue-600 rounded-full hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-300 transform hover:scale-105"
             >
                 Search
             </button>

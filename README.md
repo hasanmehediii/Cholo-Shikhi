@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Wiki Explorer
 
-## Getting Started
+## Project Description
 
-First, run the development server:
+Wiki Explorer is a modern web application built with Next.js that allows users to search for any topic on Wikipedia and explore its content in an organized and user-friendly manner. The application fetches data from the Wikipedia API, presents it in a clean, responsive design, and offers an innovative AI-powered summarization feature for each section of a Wikipedia page.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+-   **Instant Wikipedia Search:** Quickly search for any topic available on Wikipedia.
+-   **Organized Content Display:** View Wikipedia page content broken down into digestible sections.
+-   **AI-Powered Summarization:** Get concise summaries of individual sections using the Eden AI API, helping you grasp key information faster.
+-   **Responsive Design:** Enjoy a seamless experience across various devices, from desktops to mobile phones.
+-   **Modern UI:** A clean, intuitive, and aesthetically pleasing user interface built with Tailwind CSS.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Technologies Used
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+-   **Next.js:** React framework for production.
+-   **React:** A JavaScript library for building user interfaces.
+-   **Tailwind CSS:** A utility-first CSS framework for rapid UI development.
+-   **Wikipedia API:** For fetching encyclopedic content.
+-   **Eden AI:** For AI-powered text summarization.
+-   **html-react-parser:** To parse HTML content into React components.
 
-## Learn More
+## Setup
 
-To learn more about Next.js, take a look at the following resources:
+Follow these steps to set up the project locally:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/your-username/wiki-explorer.git
+    cd wiki-explorer
+    ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
 
-## Deploy on Vercel
+3.  **Set up Environment Variables:**
+    Create a `.env.local` file in the root of your project and add your Eden AI API key:
+    ```
+    EDENAI_API_KEY=your_eden_ai_api_key
+    ```
+    You can obtain an API key from [Eden AI](https://www.edenai.co/).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4.  **Run the development server:**
+    ```bash
+    npm run dev
+    ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+    Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## Deployment
+
+This project is configured for deployment on Vercel. Ensure you have the Vercel CLI installed and are logged in.
+
+1.  **Install Vercel CLI (if you haven't already):**
+    ```bash
+    npm install -g vercel
+    ```
+
+2.  **Log in to Vercel:**
+    ```bash
+    vercel login
+    ```
+
+3.  **Deploy the project:**
+    ```bash
+    vercel
+    ```
+    Follow the prompts to link your project and deploy. Make sure to add your `EDENAI_API_KEY` as an environment variable in your Vercel project settings.
