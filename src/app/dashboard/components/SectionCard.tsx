@@ -29,7 +29,7 @@ export default function SectionCard({ section, htmlContent }: { section: Section
                 return element.map(getTextContent).join(' ');
             }
             // Check if it's a React element with children
-            if (isValidElement(element) && element.props && 'children' in element.props) {
+            if (isValidElement(element) && element.props && typeof element.props === 'object' && 'children' in element.props) {
                 return getTextContent(element.props.children);
             }
             return '';
