@@ -1,4 +1,9 @@
 # Wiki Explorer
+<p align="center">
+  <img src="graduation.png" alt="Project Logo" width="150" height="150" style="border-radius: 50%; border: 2px solid #ccc;" />
+  <br>
+  <strong>Wiki Explorer - Cholo Shikhi</strong>
+</p>
 
 ## Project Description
 
