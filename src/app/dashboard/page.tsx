@@ -2,23 +2,11 @@
 
 import { useState } from "react";
 import SearchBar from "./components/SearchBar";
-import SectionCard from "./components/SectionCard";
-
-interface Section {
-    toclevel: number;
-    level: string;
-    line: string;
-    number: string;
-    index: string;
-    fromtitle: string;
-    byteoffset: number;
-    anchor: string;
-}
 
 interface WikiData {
     title: string;
-    sections: Section[];
-    htmlContent: string;
+    summary: string;
+    images: string[];
 }
 
 interface WikiError {
@@ -82,10 +70,19 @@ export default function DashboardPage() {
                         <h2 className="text-3xl sm:text-4xl font-bold text-center text-gray-800 mb-6">
                             {data.title}
                         </h2>
-                        <div className="sections-container">
-                            {data.sections.map((section: Section) => (
-                                <SectionCard key={section.index} section={section} htmlContent={data.htmlContent} />
-                            ))}
+                        <div className="bg-white rounded-xl shadow-md p-6 mb-8">
+                            <h3 className="text-2xl font-bold text-gray-800 mb-4">Summary</h3>
+                            <p className="text-lg text-gray-700 whitespace-pre-line">{data.summary}</p>
+                        </div>
+                        <div className="bg-white rounded-xl shadow-md p-6">
+                            <h3 className="text-2xl font-bold text-gray-800 mb-4">Images</h3>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                                {data.images.map((image, index) => (
+                                    <div key={index} className="rounded-lg overflow-hidden">
+                                        <img src={image} alt={`Image ${index + 1} from ${data.title}`} className="w-full h-full object-cover" />
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     </div>
                 )}

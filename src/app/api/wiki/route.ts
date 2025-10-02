@@ -23,29 +23,52 @@ export async function GET(req: Request) {
 
         const pageTitle = searchData[1][0];
 
-        // Use Wikipedia parse API to get sections and content
-        const res = await fetch(
-            `https://en.wikipedia.org/w/api.php?action=parse&page=${encodeURIComponent(
-                pageTitle
-            )}&format=json&prop=sections|text&origin=*`
-        );
+        const [extractRes, contentRes] = await Promise.all([
+            fetch(
+                `https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exintro&titles=${encodeURIComponent(
+                    pageTitle
+                )}&format=json&explaintext&origin=*`
+            ),
+            fetch(
+                `https://en.wikipedia.org/w/api.php?action=parse&page=${encodeURIComponent(
+                    pageTitle
+                )}&format=json&prop=text&origin=*`
+            )
+        ]);
 
-        const data = await res.json();
+        const extractData = await extractRes.json();
+        const contentData = await contentRes.json();
 
-        if (data.error) {
+        if (contentData.error) {
             return NextResponse.json({ error: `Could not retrieve details for "${pageTitle}".` }, { status: 404 });
         }
 
-        let htmlContent = data.parse.text["*"];
-        const sections = data.parse.sections;
+        const pageId = Object.keys(extractData.query.pages)[0];
+        const extract = extractData.query.pages[pageId].extract;
+
+        let htmlContent = contentData.parse.text["*"];
 
         // Remove reference links
         htmlContent = htmlContent.replace(/<sup class=\"reference\".*?<\/sup>/g, "");
 
+        // Extract image URLs
+        const imageUrls = [];
+        const imageRegex = /<img[^>]+src="([^">]+)"/g;
+        let match;
+        while ((match = imageRegex.exec(htmlContent)) !== null) {
+            let imageUrl = match[1];
+            if (imageUrl.startsWith("//")) {
+                imageUrl = "https" + imageUrl;
+            } else if (imageUrl.startsWith("/")) {
+                imageUrl = "https://en.wikipedia.org" + imageUrl;
+            }
+            imageUrls.push(imageUrl);
+        }
+
         return NextResponse.json({
-            title: data.parse.title,
-            sections: sections,
-            htmlContent,
+            title: contentData.parse.title,
+            summary: extract,
+            images: imageUrls,
         });
     } catch (error) {
         console.error("Wikipedia API Error:", error);
