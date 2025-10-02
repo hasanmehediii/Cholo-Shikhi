@@ -37,6 +37,12 @@ export default function SectionCard({ section, htmlContent }: { section: Section
 
         const textContent = getTextContent(content);
 
+        if (textContent.length < 200) {
+            setSummary("This section is too short to summarize.");
+            setSummarizing(false);
+            return;
+        }
+
         try {
             const res = await fetch("/api/summarize", {
                 method: "POST",
@@ -60,7 +66,7 @@ export default function SectionCard({ section, htmlContent }: { section: Section
     };
 
     return (
-        <div className="section-card bg-gray-800 text-white rounded-xl shadow-md overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-lg">
+        <div className="section-card bg-gray-800 text-white rounded-xl shadow-md overflow-hidden">
             <div className="p-6">
                 <h3 className="section-card-title text-xl font-semibold mb-4">{section.line}</h3>
                 <div className="section-card-content">
