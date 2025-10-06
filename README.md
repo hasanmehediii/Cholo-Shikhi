@@ -19,7 +19,7 @@ Wiki Explorer is a modern web application built with Next.js that allows users t
 
 ## Screenshots
 ![Home Page](welcome.png)
-
+---
 ![Result Page](body.png)
 
 ## Technologies Used
