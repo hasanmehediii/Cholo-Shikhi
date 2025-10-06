@@ -18,9 +18,15 @@ Wiki Explorer is a modern web application built with Next.js that allows users t
 -   **Modern UI:** A clean, intuitive, and aesthetically pleasing user interface built with Tailwind CSS.
 
 ## Screenshots
+
 ![Home Page](welcome.png)
+**Home Page**
+
 ---
+
 ![Result Page](body.png)
+**Result Page**
+
 
 ## Technologies Used
 
